@@ -36,7 +36,7 @@ A modern project management application built with Next.js, React 18, and shadcn
 
 1. Clone the repository:
    \`\`\`bash
-   git clone https://github.com/codemedic213515/project-management.git
+   git clone https://github.com/codemedic213515/test-project-management.git
    cd project-management
    \`\`\`
 
