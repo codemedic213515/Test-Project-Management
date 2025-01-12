@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { Star } from 'lucide-react'
-import { useProjects } from "@/context/project-context"
-import { Button } from "@/components/ui/button"
+import Link from "next/link";
+import { Star } from "lucide-react";
+import { useProjects } from "@/context/project-context";
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -11,22 +11,22 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { toggleFavorite } from "@/lib/api"
-import { format } from "date-fns"
-import { cn } from "@/lib/utils"
+} from "@/components/ui/table";
+import { toggleFavorite } from "@/lib/api";
+import { format } from "date-fns";
+import { cn } from "@/lib/utils";
 
 export default function ProjectList() {
-  const { projects, loading, error, refreshProjects } = useProjects()
+  const { projects, loading, error, refreshProjects } = useProjects();
 
   const handleToggleFavorite = async (id: string) => {
     try {
-      await toggleFavorite(id)
-      refreshProjects()
+      await toggleFavorite(id);
+      refreshProjects();
     } catch (error) {
-      console.error("Failed to toggle favorite:", error)
+      console.error("Failed to toggle favorite:", error);
     }
-  }
+  };
 
   if (loading) {
     return (
@@ -43,7 +43,7 @@ export default function ProjectList() {
           ))}
         </div>
       </div>
-    )
+    );
   }
 
   if (error) {
@@ -57,11 +57,11 @@ export default function ProjectList() {
           </Button>
         </div>
       </div>
-    )
+    );
   }
 
   return (
-    <div className="p-8">
+    <div className="p-8 w-1/2">
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-bold">Projects</h1>
         <Button asChild>
@@ -88,25 +88,28 @@ export default function ProjectList() {
                 <TableCell>
                   <Link
                     href={`/projects/${project.id}`}
-                    className="hover:underline"
-                  >
+                    className="hover:underline">
                     {project.name}
                   </Link>
                 </TableCell>
-                <TableCell>{format(new Date(project.startDate), "yyyy-MM-dd")}</TableCell>
-                <TableCell>{format(new Date(project.endDate), "yyyy-MM-dd")}</TableCell>
+                <TableCell>
+                  {format(new Date(project.startDate), "yyyy-MM-dd")}
+                </TableCell>
+                <TableCell>
+                  {format(new Date(project.endDate), "yyyy-MM-dd")}
+                </TableCell>
                 <TableCell>{project.projectManager}</TableCell>
                 <TableCell>
                   <div className="flex items-center gap-2">
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() => handleToggleFavorite(project.id)}
-                    >
+                      onClick={() => handleToggleFavorite(project.id)}>
                       <Star
                         className={cn(
                           "h-4 w-4",
-                          project.isFavorite && "fill-yellow-400 text-yellow-400"
+                          project.isFavorite &&
+                            "fill-yellow-400 text-yellow-400",
                         )}
                       />
                     </Button>
@@ -121,6 +124,5 @@ export default function ProjectList() {
         </Table>
       </div>
     </div>
-  )
+  );
 }
-

@@ -1,19 +1,23 @@
-import { Inter } from 'next/font/google'
-import { Toaster } from "sonner"
-import { ProjectProvider } from "@/context/project-context"
-import { AppSidebar } from "@/components/sidebar"
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
-import "./globals.css"
+import { Inter } from "next/font/google";
+import { Toaster } from "sonner";
+import { ProjectProvider } from "@/context/project-context";
+import { AppSidebar } from "@/components/sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"] });
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body className={inter.className}>
         <ProjectProvider>
           <SidebarProvider>
-            <div className="flex min-h-screen">
+            <div className="flex min-h-screen w-full">
               <AppSidebar />
               <SidebarInset>{children}</SidebarInset>
             </div>
@@ -22,6 +26,5 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Toaster />
       </body>
     </html>
-  )
+  );
 }
-
